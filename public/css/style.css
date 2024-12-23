@@ -1,0 +1,146 @@
+/* General Styles */
+html, body {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar-brand img {
+  height: 40px;
+}
+
+.navbar-nav .nav-link {
+  color: #CFDBD5 !important; /* Default link color */
+  margin: 0 10px;
+  font-size: 16px;
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #F5CB5C !important; /* Hover color */
+}
+
+.auth-buttons .btn-warning {
+  color: #242423;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.auth-buttons .btn-warning:hover {
+  opacity: 0.8;
+}
+
+/* Root Variables */
+:root {
+  --primary-red: #FF3B3B;
+  --primary-yellow: #FFD93D;
+  --primary-black: #1A1A1A;
+  --accent-color: #4C1C8C;
+  --gradient-1: linear-gradient(45deg, #FF3B3B, #FF8C32);
+  --gradient-2: linear-gradient(45deg, #4C1C8C, #8C1C4C);
+  --dark-bg: #121212;
+}
+
+/* Global Styles */
+body {
+  background-color: var(--dark-bg);
+  color: #f8f9fe;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+}
+
+/* Styles specific to the second navbar (#user-navbar) */
+#user-navbar {
+  margin: 0; /* No additional margins */
+  padding: 0.8rem 1.5rem;
+}
+
+#user-navbar .navbar-toggler {
+  position: relative; /* Ensures proper positioning of the text */
+  padding: 0.5rem 1rem;
+}
+
+#user-navbar .navbar-toggler .navbar-toggler-text {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  color: white; /* Adjust to your theme */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  #user-navbar {
+      margin: 3px;
+      padding: 1rem; /* Add padding for better spacing */
+  }
+
+  #user-navbar .navbar-toggler {
+      margin-bottom: 8px;
+  }
+
+  #user-navbar .nav-item {
+      margin-bottom: 0.5rem; /* Add spacing between links */
+  }
+
+  #user-navbar .nav-link {
+      text-align: center; /* Center-align links */
+  }
+}
+
+/* Background and Border for #user-navbar */
+#user-navbar.navbar {
+  background-color: var(--dark-bg);
+  border-top: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/* Styles for nav links within #user-navbar */
+#user-navbar .nav-link {
+  color: var(--primary-yellow);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin-left: 5px;
+}
+
+#user-navbar .nav-link:hover,
+#user-navbar .nav-link.active {
+  color: #FFF;
+  background-color: var(--accent-color);
+}
+
+
+/* Footer */
+footer {
+  position: relative;
+  left: -2vw;                  /* Offset the margin-left */
+  right: -2vw;                 /* Offset the margin-right */
+  width: calc(100% + 4vw);      /* Add the total margin space back to the width */
+  background-color: #343a40;
+  color: #f8f9fa;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: auto;
+}
+
+footer a {
+  color: #F5CB5C;
+  text-decoration: none;
+}
+
+footer a:hover {
+  opacity: 0.8;
+}

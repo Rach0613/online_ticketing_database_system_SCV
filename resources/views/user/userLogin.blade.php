@@ -1,0 +1,384 @@
+@extends('layout')
+
+@section('title', 'Users Login')
+
+@section('content')
+<div class="login-container">
+    <!-- Left Section: Form -->
+    <div class="form-section">
+        <img src="{{ asset('images/SCV Logo.png') }}" alt="Sarawak Cultural Village Logo">
+        <h1>Log In</h1>
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        <form action="{{ route('account.authenticate') }}" method="POST">
+            
+        @csrf
+        <!-- Email Field -->
+        <label for="email">Email Address</label>
+        <div class="mb-3" style="width: 100%;">
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="Enter your email address" 
+                value="{{ old('email') }}"
+                required>
+            @error('email')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Password Field -->
+        <label for="password">Password</label>
+        <div class="password-container mb-3">
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="Enter your password"
+                style="padding-right: 40px;"
+                required> <!-- Space for toggle icon -->
+            <span class="password-toggle" id="toggle-password" onclick="togglePassword()">
+                <i class="fas fa-eye-slash"></i>
+            </span>
+            @error('password')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+            <a onclick="redirectToForgotPassword()">Forgot Password?</a>
+            <button type="submit">Login</button>
+        </form>
+        <p>Not a member yet? <a href="{{ route('account.register') }}">Sign Up now</a></p>
+    </div>
+
+    <!-- Right Section: Background Image -->
+    <div class="image-section"></div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spiral-loader"></div>
+    <div class="progress-container">
+        <div class="loading-text" id="loadingText">Loading... 0%</div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" id="loadingBar" style="width: 0%;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+function redirectToForgotPassword() {
+    var loadingOverlay = document.getElementById("loadingOverlay");
+    var loadingBar = document.getElementById("loadingBar");
+    var loadingText = document.getElementById("loadingText");
+    var progress = 0;
+
+    loadingOverlay.style.display = "flex"; // Show the loading overlay
+
+    var interval = setInterval(() => {
+        if (progress >= 100) {
+            clearInterval(interval);
+            loadingOverlay.style.display = "none"; // Hide the loading overlay
+            window.location.href = "{{ route('account.forgetPass') }}"; // Replace with your actual URL
+        } else {
+            progress += 10;
+            loadingBar.style.width = progress + "%";
+            loadingText.textContent = `Loading... ${progress}%`;
+        }
+    }, 300); // Adjust timing for smoother progress bar
+}
+
+function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        const toggleIcon = document.getElementById("toggle-password").querySelector("i");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+        }
+    }
+</script>
+<!-- Pop-up Notification Modal -->
+@if(session('success'))
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <p>{{ session('success') }}</p>
+        <button id="closeModal">OK</button>
+    </div>
+</div>
+@endif
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const successModal = document.getElementById('successModal');
+        const closeModal = document.getElementById('closeModal');
+
+        if (successModal) {
+            successModal.style.display = 'flex'; // Show the modal
+            closeModal.addEventListener('click', () => {
+                successModal.style.display = 'none'; // Hide the modal on button click
+            });
+        }
+    });
+</script>
+@endsection
+
+@push('userLogin_styles')
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        display: flex;
+        justify-content: space-between;
+        background-color: #000;
+    }
+
+    .login-container {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+    }
+
+    /* Left Section: Form Styling */
+    .form-section {
+        flex: 3;
+        max-width: 30%;
+        padding: 40px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+    .form-section img {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 20px;
+        border-radius: 50%;
+    }
+
+    .form-section h1 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .form-section label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+
+    /* Input Styling */
+    .form-section input,
+    .form-section select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #767676;
+        border-radius: 5px;
+        background-color: #333;
+        color: white;
+        font-size: 16px;
+        margin-bottom: 0; /* Remove margin between input boxes */
+    }
+
+    .form-section select {
+        width: 80px; /* Fixed width for dropdown */
+        padding: 8px;
+        margin-right: 10px; /* Space between select and input */
+    }
+
+    .form-section input:focus,
+    .form-section select:focus {
+        border-color: white;
+        background-color: #444;
+    }
+
+    .form-section a {
+    color: #FFD700 !important;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    }
+
+.form-section a:hover {
+    text-decoration: underline !important;
+    }
+
+    .form-section button {
+        width: 100%;
+        padding: 12px;
+        background-color: #FFD700;
+        color: #000;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .form-section button:hover {
+        background-color: #FFA500;
+    }
+
+    .form-section p {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #888;
+    }
+
+    .form-section p a {
+        color: #FFD700;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    /* Error Message Styling */
+.error-message {
+    color: #FF0000; /* Uniform red color for error text */
+    font-size: 12px; /* Smaller font size */
+    margin-top: 5px; /* Space between input and error */
+    margin-bottom: 0; /* Ensure no extra space */
+    display: block; /* Ensure it appears below the input */
+    text-align: left; /* Align with the input field */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+    /* Password Container Styling */
+    .password-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .password-toggle {
+        position: absolute;
+        top: 40%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #fff;
+        font-size: 16px;
+        color: #767676; 
+        font-size: 20px; 
+        z-index: 10; 
+    }
+
+    input[type="password"] {
+        padding-right: 40px; /* Space for the toggle icon */
+    }
+
+    /* Right Section: Background Image */
+    .image-section {
+        flex: 7;
+        background: url('https://scv.com.my/wp-content/uploads/2018/08/event-banner-min.jpg') no-repeat center center;
+        background-size: cover;
+        opacity: 0.7;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .login-container {
+            flex-direction: column;
+        }
+
+        .image-section {
+            height: 300px;
+        }
+
+        .form-section {
+            max-width: 100%;
+            padding: 20px;
+        }
+    }
+        /* Loading Overlay */
+        .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      display: none; /* Hidden by default */
+      flex-direction: column;
+    }
+
+    .spiral-loader {
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      border-top: 5px solid #FFD700;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+       /* Modal (Pop-up) */
+       .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #222;
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+    }
+
+    .modal button {
+      background-color: #FFD700;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .modal button:hover {
+      background-color: #FFA500;
+    }
+
+  @media (max-width: 768px) {
+    .signup-container {
+      margin: 2vw;
+    }
+  }
+</style>
+@endpush
