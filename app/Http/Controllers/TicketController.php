@@ -143,10 +143,11 @@ class TicketController extends Controller
     // Store payment details
     Payment::create([
         'booking_id' => $booking->id,
+        'user_id' => auth()->id(),
         'amount' => $request->total_amount,
         'payment_method' => $request->payment_method,
         'status' => 'successful',
-    ]);
+    ]);    
 
     // Update the booking status to "confirmed"
     $booking->update(['status' => 'confirmed']);

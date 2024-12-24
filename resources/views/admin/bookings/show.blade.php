@@ -31,6 +31,13 @@
                 @endif
             </ul>
 
+            <h5>Payment Information</h5>
+            <ul>
+                <li><strong>Amount:</strong> RM{{ $booking->payment->amount ?? 'N/A' }}</li>
+                <li><strong>Payment Date:</strong> {{ $booking->payment->created_at ?? 'N/A' }}</li>
+                <li><strong>Payment Status:</strong> {{ ucfirst($booking->payment->status ?? 'N/A') }}</li>
+            </ul>            
+
             <h5>Seat Information</h5>
             <table class="table table-bordered mt-3">
                 <thead>
