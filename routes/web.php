@@ -43,7 +43,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('signup', [LoginController::class, 'register'])->name('account.register'); // Register Page
         Route::post('process-register', [LoginController::class, 'processRegister'])->name('account.processRegister'); // Register Action
         Route::post('authenticate', [LoginController::class, 'authenticate'])->name('account.authenticate'); // Login Action
-        Route::get('forgetPass', [ForgetPasswordController::class, 'index'])->name('account.forgetPass');
+        Route::get('forgetPass', [ForgetPasswordController::class, 'index'])->name('account.forgetPass'); // Reset Password Page
     });
 
     // Routes for Authenticated Users
@@ -56,19 +56,19 @@ Route::group(['prefix' => 'user'], function () {
 // Ticketing Pages
 Route::group(['prefix' => 'ticket', 'middleware' => 'auth'], function () {
     // Display Pages
-    Route::get('timedate', [TicketController::class, 'timedate'])->name('ticket.timedate');
-    Route::get('select-seat', [TicketController::class, 'selectSeat'])->name('ticket.select_seat');
-    Route::get('checkout', [TicketController::class, 'checkout'])->name('ticket.checkout');
-    Route::get('payment', [TicketController::class, 'payment'])->name('ticket.payment');
-    Route::get('all-tickets', [TicketController::class, 'allTickets'])->name('all_tickets');
+    Route::get('timedate', [TicketController::class, 'timedate'])->name('ticket.timedate'); //Select Time and Date
+    Route::get('select-seat', [TicketController::class, 'selectSeat'])->name('ticket.select_seat'); // Select Seat
+    Route::get('checkout', [TicketController::class, 'checkout'])->name('ticket.checkout'); // Proceed to checkout, verify details
+    Route::get('payment', [TicketController::class, 'payment'])->name('ticket.payment'); // Make Payment
+    Route::get('all-tickets', [TicketController::class, 'allTickets'])->name('all_tickets'); // Show all purchase history
 
     // Action Routes
-    Route::post('timedate/store', [TicketController::class, 'storeTimeDate'])->name('ticket.timedate.store');
-    Route::post('select-seat/store', [TicketController::class, 'storeSelectedSeats'])->name('ticket.select_seat.store');
-    Route::post('checkout/create', [TicketController::class, 'createBooking'])->name('ticket.checkout.create');
-    Route::post('payment/process', [TicketController::class, 'processPayment'])->name('ticket.payment.process');
-    Route::get('ticket/payment', [TicketController::class, 'payment'])->name('ticket.payment');
-    Route::get('ticket/payment/cancel', [TicketController::class, 'cancelPayment'])->name('ticket.payment.cancel');
+    Route::post('timedate/store', [TicketController::class, 'storeTimeDate'])->name('ticket.timedate.store'); // Store Time and Date
+    Route::post('select-seat/store', [TicketController::class, 'storeSelectedSeats'])->name('ticket.select_seat.store'); // Store Selected Seats
+    Route::post('checkout/create', [TicketController::class, 'createBooking'])->name('ticket.checkout.create'); // Create the bookings
+    Route::post('payment/process', [TicketController::class, 'processPayment'])->name('ticket.payment.process'); // Process to Payment
+    Route::get('ticket/payment', [TicketController::class, 'payment'])->name('ticket.payment'); // Make Payment
+    Route::get('ticket/payment/cancel', [TicketController::class, 'cancelPayment'])->name('ticket.payment.cancel'); // Cancel the payment
 });
 
 
@@ -87,9 +87,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('logout', [AdminLoginController::class, 'logout'])->name('admin.logout'); // Admin Logout
 
         // Admin Contact Us Routes
-        Route::get('get-contact-us', [AdminDashboardController::class, 'getContactUs'])->name('admin.getcontactus');
-        Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.submissions');
-        Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('admin.contact.delete');
+        Route::get('get-contact-us', [AdminDashboardController::class, 'getContactUs'])->name('admin.getcontactus'); // Retrieve all submissions
+        Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.submissions'); // Show all Contact Us Form
+        Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('admin.contact.delete'); // Delete the Submission
 
         // Admin Users Routes
         Route::group(['prefix' => 'users'], function () {
