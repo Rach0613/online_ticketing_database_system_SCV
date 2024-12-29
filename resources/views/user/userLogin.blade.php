@@ -159,7 +159,7 @@ function togglePassword() {
         flex: 3;
         max-width: 30%;
         padding: 40px;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+        background: linear-gradient(to top, rgba(79, 77, 77, 0.27), rgba(167, 157, 157, 0.27));
         display: flex;
         flex-direction: column;
         justify-content: center;

@@ -85,7 +85,6 @@
         width: 60vw;
         background-color: rgba(245, 203, 92, 0.7); /* Semi-translucent yellow */
         padding: 30px;
-        border-radius: 10px;
         margin: 2px auto;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         height: 100%; /* Ensure full height */
@@ -133,16 +132,29 @@
     }
 
     /* Left Section - Image */
-    .contact-image {
+    .contact-image{
         width: 40%;
-        background-image: url('https://cdn-imgix.headout.com/tour/37929/TOUR-IMAGE/636e576b-e453-4914-bd35-e93de42021bc-19433-sarawak-sarawak-cultural-village-half-day-tour--07.jpg?auto=compress&w=768&h=480&fit=min');
-        background-size: cover;
-        background-position: center;
         height: 100%;
         position: relative;
+
+  
+    }
+    .contact-image::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://cdn-imgix.headout.com/tour/37929/TOUR-IMAGE/636e576b-e453-4914-bd35-e93de42021bc-19433-sarawak-sarawak-cultural-village-half-day-tour--07.jpg?auto=compress&w=768&h=480&fit=min');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(5px); /* Blur applied to the background only */
+      z-index: -1; /* Ensures it stays behind the content */
     }
 
-    .contact-image .contact-info {
+   .contact-info {
         position: absolute;
         top: 50%;
         left: 20px;
@@ -151,6 +163,7 @@
         padding: 15px;
         border-radius: 10px;
         width: 90%;
+        z-index: 1;
     }
 
     .contact-info p {

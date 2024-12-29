@@ -100,13 +100,14 @@ function togglePassword() {
         height: 100vh;
         display: flex;
         justify-content: space-between;
-        background-color: #000;
+        background-color: #242423;
     }
 
     .login-container {
         display: flex;
         width: 100%;
         height: 100vh;
+        background-color: #242423
     }
 
     /* Left Section: Form Styling */
@@ -114,7 +115,7 @@ function togglePassword() {
         flex: 3;
         max-width: 30%;
         padding: 40px;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+        background: linear-gradient(to top, rgba(41, 40, 40, 0.27), rgba(116, 112, 112, 0.115));
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -182,7 +183,7 @@ function togglePassword() {
         width: 100%;
         padding: 12px;
         background-color: #FFD700;
-        color: #000;
+        color: #23231f;
         border: none;
         border-radius: 5px;
         font-size: 16px;

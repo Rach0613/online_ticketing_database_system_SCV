@@ -124,14 +124,14 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <div class="d-flex justify-content-center">
-          <img src="https://scv.com.my/wp-content/uploads/2018/09/Bandaraya-Kuching-Utara-350x350.png" class="d-block mx-2 sponsor-img" alt="Sponsor 1">
+          <img src="https://scv.com.my/wp-content/uploads/2018/09/Bandaraya-Kuching-Utara-350x350.png" class="d-block mx-2 sponsor-img"  alt="Sponsor 1">
           <img src="https://scv.com.my/wp-content/uploads/2018/09/Padawan-Municipal-Council-350x350.png" class="d-block mx-2 sponsor-img" alt="Sponsor 2">
           <img src="https://scv.com.my/wp-content/uploads/2018/09/Tourism-Malaysia-350x350.png" class="d-block mx-2 sponsor-img" alt="Sponsor 3">
         </div>
       </div>
       <div class="carousel-item">
         <div class="d-flex justify-content-center">
-          <img src="https://whatthelogo.com/storage/logos/sarawak-convention-bureau-77000.png" class="d-block mx-2 sponsor-img" alt="Sponsor 4">
+          <img src="https://whatthelogo.com/storage/logos/sarawak-convention-bureau-77000.png" class="d-block mx-2 sponsor-img" style="object-fit: contain" alt="Sponsor 4">
           <img src="https://scv.com.my/wp-content/uploads/2018/09/Ministry-of-Tourism-Sarawak-350x350.png" class="d-block mx-2 sponsor-img" alt="Sponsor 5">
           <img src="https://b2b.sarawaktourism.com/assets/img/sarawak-tourism-logo.png" class="d-block mx-2 sponsor-img" alt="Sponsor 6">
         </div>
@@ -358,6 +358,12 @@ h2 {
     position: relative;
     z-index: 1;
     width: 100%;
+}
+
+.carousel-item img{
+
+  object-fit: cover;
+
 }
 
 /* Fix section spacing */
