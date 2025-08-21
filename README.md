@@ -1,4 +1,4 @@
-## About This Project - SCV_Project
+## SCV_Project
 
 This project is an assignment for KMK3393 Web Programming. It involves building a website for Sarawak Culture Village (SCV) using HTML, CSS, Bootstrap, and PHP within the Laravel Framework. Furthermore, it focuses on creating a responsive website that is suitable for PC, iPad, and phone. The project also requires the development of a database using phpMyAdmin to store data in MySQL.
 
